@@ -1,0 +1,9 @@
+alsa-utils
+gcc-4.6-base:armhf
+gcc-4.7-base:armhf
+gcc-4.8-base:armhf
+isc-dhcp-client
+isc-dhcp-common
+plymouth
+triggerhappy
+xkb-data 

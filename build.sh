@@ -25,6 +25,17 @@ EOF
 			fi
 			log "End ${SUB_STAGE_DIR}/${i}-packages-nr"
 		fi
+		if [ -f "${i}-packages-purge" ]; then
+			log "Begin ${SUB_STAGE_DIR}/${i}-packages-purge"
+			PACKAGES="$(sed -f "${SCRIPT_DIR}/remove-comments.sed" < "${i}-packages-purge")"
+			if [ -n "$PACKAGES" ]; then
+				on_chroot << EOF
+apt-get purge -y $PACKAGES
+apt-get autoremove -y
+EOF
+			fi
+			log "End ${SUB_STAGE_DIR}/${i}-packages-purge"
+		fi
 		if [ -f "${i}-packages" ]; then
 			log "Begin ${SUB_STAGE_DIR}/${i}-packages"
 			PACKAGES="$(sed -f "${SCRIPT_DIR}/remove-comments.sed" < "${i}-packages")"
